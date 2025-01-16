@@ -2,6 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Add the necessary imports
 import Navbar from "./components/Header/Navbar"; // Adjust the path based on where your Navbar component is saved.
 import Home from "./pages/Home";
+import UpdateProductPage from "./pages/UpdateProductPage";
+import AddProductPage from "./pages/AddProductPage";
+import DeleteProductPage from "./pages/DeleteProductPage";
+import OrdersPage from "./pages/OrdersPage";
+import StocksPage from "./pages/StockesPage";
 
 const App = () => {
   const title = "The Trendzy";
@@ -16,6 +21,11 @@ const App = () => {
         </div> */}
         <Routes>
           <Route path="/" element={<Home />} /> {/* Define the route for Home */}
+          <Route path="/update-product" element={<UpdateProductPage />} />
+          <Route path="/add-product" element={<AddProductPage />} />
+          <Route path="delete-product" element={<DeleteProductPage/>}/>
+          <Route path="orders" element={<OrdersPage/>}/>
+          <Route path="/stocks" element={<StocksPage />} />
         </Routes>
       </div>
     </Router>
