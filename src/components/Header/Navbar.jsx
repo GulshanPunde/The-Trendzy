@@ -3,8 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Categories from "./Categories";
 import UpdateProduct from "./UpdateProduct";
 import Searchbar from "./Searchbar";
-import LogoutModal from "../extras/LogoutModal"; // Import the LogoutModal component
-
+import LogoutModal from "../extras/LogoutModal";
 
 const Navbar = ({ title }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -97,7 +96,22 @@ const Navbar = ({ title }) => {
 
               {/* UpdateProduct Dropdown */}
               <li className="nav-item dropdown">
-                <UpdateProduct />
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="updateProductDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Update Product
+                </a>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="updateProductDropdown"
+                >
+                  <UpdateProduct />
+                </ul>
               </li>
             </ul>
 
