@@ -26,7 +26,7 @@ const AddProductPage = () => {
   };
 
   return (
-    <div className="container m-4">
+    <div className="container mt-4 mb-3">
       <h2 className="text-center">Add New Product</h2>
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6 col-xl-5">

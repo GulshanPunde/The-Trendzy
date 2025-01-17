@@ -11,17 +11,27 @@ const ProductCard = ({ product, onUpdate, onRemove }) => {
   const imgPath = `/images/${product.id}.jpg`; // Image path based on product ID
 
   return (
-    <div className="card shadow-lg" style={{ width: '100%', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
+    <div
+      className="card shadow-lg"
+      style={{
+        width: '100%',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        textAlign: 'center', // Center align contents
+      }}
+    >
       <img
         onClick={handleClick}
         src={imgPath}
         alt={product.name}
         className="card-img-top pointer"
         style={{
-          width: '100%',  // Make the image take up full width
-          height: 'auto', // Maintain aspect ratio
-          objectFit: 'cover', // Ensure it covers the area without distortion
-          borderRadius: '8px 8px 0 0',  // Rounded top corners
+          maxWidth: '80%', // Limit image width
+          maxHeight: '150px', // Limit image height
+          margin: '10px auto', // Center the image horizontally and add spacing
+          display: 'block', // Ensure proper alignment
+          objectFit: 'contain', // Ensure the image fits within the bounds without cropping
         }}
       />
       <div className="card-body">
