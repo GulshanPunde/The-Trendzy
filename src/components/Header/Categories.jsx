@@ -8,17 +8,26 @@ function Categories() {
     (state) => state.products
   );
 
+  // Function to close the navbar
+  const closeNavbar = () => {
+    const navbar = document.querySelector(".navbar-collapse");
+    if (navbar) {
+      navbar.classList.remove("show");
+    }
+  };
+
   const handleMouseEnter = (category) => {
-    dispatch(setSelectedCategory(category));
+    dispatch(setSelectedCategory(category)); // Hover filtering
   };
 
   const handleCategoryClick = (category) => {
     dispatch(setSelectedCategory(category));
+    closeNavbar(); // Close navbar after selecting a category
   };
 
   return (
     <div className="dropdown mb-lg-0">
-      {/* Dropdown toggle with Bootstrap's default behavior */}
+      {/* Dropdown toggle */}
       <a
         href="#"
         className="nav-link dropdown-toggle"
@@ -38,8 +47,7 @@ function Categories() {
             <a
               href="#"
               className="dropdown-item"
-              onClick={() => handleCategoryClick(category)} // Closes dropdown automatically
-              data-bs-toggle="dropdown" // Explicitly closes the dropdown on click
+              onClick={() => handleCategoryClick(category)} // Close navbar on click
             >
               {category}
             </a>
