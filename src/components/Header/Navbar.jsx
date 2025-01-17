@@ -95,24 +95,7 @@ const Navbar = ({ title }) => {
               </li>
 
               {/* UpdateProduct Dropdown */}
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="updateProductDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Update Product
-                </a>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="updateProductDropdown"
-                >
-                  <UpdateProduct />
-                </ul>
-              </li>
+              <UpdateProduct/>
             </ul>
 
             {/* Conditionally Render Searchbar */}
