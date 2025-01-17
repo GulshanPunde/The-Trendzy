@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Categories from "./Categories";
 import UpdateProduct from "./UpdateProduct";
-import Searchbar from "./Searchbar";
 import LogoutModal from "../extras/LogoutModal";
+import Searchbar from "./Searchbar";
 
 const Navbar = ({ title }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
