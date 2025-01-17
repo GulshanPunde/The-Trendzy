@@ -1,45 +1,53 @@
 import React from "react";
+import { setSelectedCategory } from "../../features/product/product";
+import { useSelector, useDispatch } from "react-redux";
 
-const Categories = () => {
-  // Function to close the navbar after clicking a dropdown item
-  const closeNavbar = () => {
-    const navbar = document.querySelector(".navbar-collapse");
-    if (navbar) {
-      navbar.classList.remove("show");
-    }
+function Categories() {
+  const dispatch = useDispatch();
+  const { categories, selectedCategory } = useSelector(
+    (state) => state.products
+  );
+
+  const handleMouseEnter = (category) => {
+    dispatch(setSelectedCategory(category));
+  };
+
+  const handleCategoryClick = (category) => {
+    dispatch(setSelectedCategory(category));
   };
 
   return (
-    <li className="nav-item dropdown">
+    <div className="dropdown mb-lg-0">
+      {/* Dropdown toggle with Bootstrap's default behavior */}
       <a
-        className="nav-link dropdown-toggle"
         href="#"
-        id="categoriesDropdown"
+        className="nav-link dropdown-toggle"
+        id="dropDownLink1"
         role="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        Categories
+        {selectedCategory || "Categories"}
       </a>
-      <ul className="dropdown-menu" aria-labelledby="categoriesDropdown">
-        <li>
-          <a className="dropdown-item" href="#" onClick={closeNavbar}>
-            Category 1
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#" onClick={closeNavbar}>
-            Category 2
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#" onClick={closeNavbar}>
-            Category 3
-          </a>
-        </li>
+      <ul className="dropdown-menu" aria-labelledby="dropDownLink1">
+        {categories.map((category) => (
+          <li
+            key={category}
+            onMouseEnter={() => handleMouseEnter(category)} // Hover filtering
+          >
+            <a
+              href="#"
+              className="dropdown-item"
+              onClick={() => handleCategoryClick(category)} // Closes dropdown automatically
+              data-bs-toggle="dropdown" // Explicitly closes the dropdown on click
+            >
+              {category}
+            </a>
+          </li>
+        ))}
       </ul>
-    </li>
+    </div>
   );
-};
+}
 
 export default Categories;

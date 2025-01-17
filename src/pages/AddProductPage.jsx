@@ -26,85 +26,89 @@ const AddProductPage = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container m-4">
       <h2 className="text-center">Add New Product</h2>
-      <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="productName" className="form-label">
-            Product Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="productName"
-            name="name"
-            value={product.name}
-            onChange={handleChange}
-            placeholder="Enter product name"
-            required
-          />
+      <div className="row justify-content-center">
+        <div className="col-md-8 col-lg-6 col-xl-5">
+          <form className="p-4 border rounded bg-light shadow" onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="productName" className="form-label">
+                Product Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="productName"
+                name="name"
+                value={product.name}
+                onChange={handleChange}
+                placeholder="Enter product name"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="productCategory" className="form-label">
+                Category
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="productCategory"
+                name="category"
+                value={product.category}
+                onChange={handleChange}
+                placeholder="Enter product category"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="productPrice" className="form-label">
+                Price ($)
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="productPrice"
+                name="price"
+                value={product.price}
+                onChange={handleChange}
+                placeholder="Enter product price"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="productDescription" className="form-label">
+                Description
+              </label>
+              <textarea
+                className="form-control"
+                id="productDescription"
+                name="description"
+                value={product.description}
+                onChange={handleChange}
+                placeholder="Enter product description"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="productImage" className="form-label">
+                Product Image
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="productImage"
+                onChange={handleImageChange}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-success w-100">
+              Add Product
+            </button>
+          </form>
         </div>
-        <div className="mb-3">
-          <label htmlFor="productCategory" className="form-label">
-            Category
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="productCategory"
-            name="category"
-            value={product.category}
-            onChange={handleChange}
-            placeholder="Enter product category"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="productPrice" className="form-label">
-            Price ($)
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="productPrice"
-            name="price"
-            value={product.price}
-            onChange={handleChange}
-            placeholder="Enter product price"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="productDescription" className="form-label">
-            Description
-          </label>
-          <textarea
-            className="form-control"
-            id="productDescription"
-            name="description"
-            value={product.description}
-            onChange={handleChange}
-            placeholder="Enter product description"
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="productImage" className="form-label">
-            Product Image
-          </label>
-          <input
-            type="file"
-            className="form-control"
-            id="productImage"
-            onChange={handleImageChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-success w-100">
-          Add Product
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

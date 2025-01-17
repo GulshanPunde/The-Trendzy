@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Categories from "./Categories";
 import UpdateProduct from "./UpdateProduct";
+import Searchbar from "./Searchbar";
+import LogoutModal from "../extras/LogoutModal"; // Import the LogoutModal component
+
 
 const Navbar = ({ title }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const location = useLocation();
 
   const toggleNavbar = () => {
     setIsCollapsed(!isCollapsed);
@@ -14,69 +19,114 @@ const Navbar = ({ title }) => {
     setIsCollapsed(true);
   };
 
-  const preventDropdownClose = (e) => {
-    e.stopPropagation(); // Prevents event propagation to the `closeNavbar` handler
+  const getActiveClass = (path) => (location.pathname === path ? "active" : "");
+
+  const handleLogout = () => {
+    console.log("User logged out.");
+    setShowLogoutModal(false);
   };
 
+  // Check if the user is on the home page
+  const isHomePage = location.pathname === "/";
+
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-light shadow"
-      style={{
-        backgroundColor: '#FF8383',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1030,
-      }}
-    >
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/" onClick={closeNavbar}>
-          <strong><i>{title.toUpperCase()}</i></strong>
-        </Link>
-        <button
-          className={`navbar-toggler ${!isCollapsed ? "" : "collapsed"}`}
-          type="button"
-          onClick={toggleNavbar}
-          aria-controls="navbarNav"
-          aria-expanded={!isCollapsed}
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className={`collapse navbar-collapse ${!isCollapsed ? "show" : ""}`}
-          id="navbarNav"
-        >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {/* Categories Dropdown */}
-            <li className="nav-item dropdown" onClick={preventDropdownClose}>
-              <Categories />
-            </li>
-            
-            {/* Stocks Link */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/stocks" onClick={closeNavbar}>
-                Stocks
-              </Link>
-            </li>
-            
-            {/* Orders Link */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/orders" onClick={closeNavbar}>
-                Orders
-              </Link>
-            </li>
-            
-            {/* UpdateProduct Dropdown */}
-            <li className="nav-item dropdown" onClick={preventDropdownClose}>
-              <UpdateProduct />
-            </li>
-          </ul>
-          <button className="btn btn-outline-dark" type="button" onClick={closeNavbar}>
-            Sign Out
+    <>
+      <nav
+        className="navbar navbar-expand-lg navbar-light shadow custom-navbar"
+        style={{
+          backgroundColor: "#FF8383",
+          position: "sticky",
+          top: 0,
+          zIndex: 1030,
+        }}
+      >
+        <div className="container-fluid">
+          {/* Brand */}
+          <Link className="navbar-brand" to="/" onClick={closeNavbar}>
+            <strong>
+              <i>{title.toUpperCase()}</i>
+            </strong>
+          </Link>
+
+          {/* Toggle Button */}
+          <button
+            className={`navbar-toggler ${!isCollapsed ? "" : "collapsed"}`}
+            type="button"
+            onClick={toggleNavbar}
+            aria-controls="navbarNav"
+            aria-expanded={!isCollapsed}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
           </button>
+
+          {/* Collapsible Navbar Content */}
+          <div
+            className={`collapse navbar-collapse ${!isCollapsed ? "show" : ""}`}
+            id="navbarNav"
+          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              {/* Conditionally Render Categories Dropdown */}
+              {isHomePage && (
+                <li className="nav-item dropdown">
+                  <Categories />
+                </li>
+              )}
+
+              {/* Stocks Link */}
+              <li className="nav-item">
+                <Link
+                  className={`nav-link ${getActiveClass("/stocks")}`}
+                  to="/stocks"
+                  onClick={closeNavbar}
+                >
+                  Stocks
+                </Link>
+              </li>
+
+              {/* Orders Link */}
+              <li className="nav-item">
+                <Link
+                  className={`nav-link ${getActiveClass("/orders")}`}
+                  to="/orders"
+                  onClick={closeNavbar}
+                >
+                  Orders
+                </Link>
+              </li>
+
+              {/* UpdateProduct Dropdown */}
+              <li className="nav-item dropdown">
+                <UpdateProduct />
+              </li>
+            </ul>
+
+            {/* Conditionally Render Searchbar */}
+            {isHomePage && (
+              <div className="d-flex align-items-center ms-auto">
+                <Searchbar onCloseNavbar={closeNavbar} />
+              </div>
+            )}
+
+            {/* Sign Out Button */}
+            <button
+              className="btn btn-outline-dark ms-2"
+              type="button"
+              onClick={() => setShowLogoutModal(true)}
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Logout Modal */}
+      <LogoutModal
+        show={showLogoutModal}
+        onConfirm={handleLogout}
+        onCancel={() => setShowLogoutModal(false)}
+      />
+    </>
   );
 };
 

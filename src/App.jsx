@@ -1,31 +1,47 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Add the necessary imports
-import Navbar from "./components/Header/Navbar"; // Adjust the path based on where your Navbar component is saved.
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Header/Navbar";
 import Home from "./pages/Home";
 import UpdateProductPage from "./pages/UpdateProductPage";
 import AddProductPage from "./pages/AddProductPage";
 import DeleteProductPage from "./pages/DeleteProductPage";
 import OrdersPage from "./pages/OrdersPage";
 import StocksPage from "./pages/StockesPage";
+import Single from "./pages/Single";
+import AdminLoginPage from "./pages/AdminLoginPage"; // Import the login page
 
 const App = () => {
   const title = "The Trendzy";
-  return (
 
-    <Router> {/* Wrap everything in the Router component */}
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Function to handle login
+  const handleLogin = (email, password) => {
+    if (email === "admin@gmail.com" && password === "thetrendzy") {
+      setIsAuthenticated(true);
+    } else {
+      alert("Invalid credentials. Please try again.");
+    }
+  };
+
+  // Protected Route component
+  const ProtectedRoute = ({ children }) => {
+    return isAuthenticated ? children : <Navigate to="/login" />;
+  };
+
+  return (
+    <Router>
       <div>
         <Navbar title={title} />
-        {/* <div className="container mt-2">
-          <h1>Welcome to The Trendzy....</h1>
-          <p>This is the main content area. Navigate using the navbar above.</p>
-        </div> */}
         <Routes>
-          <Route path="/" element={<Home />} /> {/* Define the route for Home */}
-          <Route path="/update-product" element={<UpdateProductPage />} />
-          <Route path="/add-product" element={<AddProductPage />} />
-          <Route path="delete-product" element={<DeleteProductPage/>}/>
-          <Route path="orders" element={<OrdersPage/>}/>
-          <Route path="/stocks" element={<StocksPage />} />
+          <Route path="/login" element={<AdminLoginPage onLogin={handleLogin} />} />
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/update-product" element={<ProtectedRoute><UpdateProductPage /></ProtectedRoute>} />
+          <Route path="/add-product" element={<ProtectedRoute><AddProductPage /></ProtectedRoute>} />
+          <Route path="/delete-product" element={<ProtectedRoute><DeleteProductPage /></ProtectedRoute>} />
+          <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
+          <Route path="/stocks" element={<ProtectedRoute><StocksPage /></ProtectedRoute>} />
+          <Route path="/single/:id" element={<ProtectedRoute><Single /></ProtectedRoute>} />
         </Routes>
       </div>
     </Router>

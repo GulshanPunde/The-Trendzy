@@ -1,51 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';  // Import useSelector
 import ProductCard from './ProductCard';
 
 function ShowProduct() {
-  const products = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 29.99,
-      description: 'This is a high-quality product that meets all your needs.',
-      image: 'https://picsum.photos/500/300?random=1',
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 19.99,
-      description: 'Affordable and durable, this product is perfect for daily use.',
-      image: 'https://picsum.photos/500/300?random=2',
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      price: 39.99,
-      description: 'Designed for excellence, this product offers premium quality.',
-      image: 'https://picsum.photos/500/300?random=3',
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      price: 49.99,
-      description: 'Experience the best performance with this top-rated product.',
-      image: 'https://picsum.photos/500/300?random=4',
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      price: 59.99,
-      description: 'Innovative design and exceptional functionality in one package.',
-      image: 'https://picsum.photos/500/300?random=5',
-    },
-    {
-      id: 6,
-      name: 'Product 6',
-      price: 69.99,
-      description: 'Reliable, efficient, and built to last for long-term use.',
-      image: 'https://picsum.photos/500/300?random=6',
-    },
-  ];
+  // Access products from Redux store
+  const products = useSelector((state) => state.products.productsFromSearch);
 
   const handleUpdate = (product) => {
     alert(`Updating ${product.name}`);
