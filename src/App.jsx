@@ -19,7 +19,7 @@ const App = () => {
 
   // Function to handle login
   const handleLogin = (email, password) => {
-    if (email === "admin@gmail.com" && password === "thetrendzy") {
+    if (email === "admin@gmail.com" && password === "trendzy") {
       setIsAuthenticated(true);
     } else {
       alert("Invalid credentials. Please try again.");

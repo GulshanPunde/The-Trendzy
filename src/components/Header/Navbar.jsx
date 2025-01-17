@@ -95,24 +95,27 @@ const Navbar = ({ title }) => {
               </li>
 
               {/* UpdateProduct Dropdown */}
-              <UpdateProduct/>
+              <UpdateProduct />
             </ul>
 
-            {/* Conditionally Render Searchbar */}
+            {/* Responsive Container for Searchbar and Sign Out Button */}
             {isHomePage && (
-              <div className="d-flex align-items-center ms-auto">
-                <Searchbar onCloseNavbar={closeNavbar} />
+              <div className="d-flex flex-column flex-sm-row ms-auto  mt-sm-0">
+                {/* Searchbar */}
+                <div className="flex-grow-1 me-sm-2 mb-2 mb-sm-0">
+                  <Searchbar onCloseNavbar={closeNavbar} />
+                </div>
+
+                {/* Sign Out Button */}
+                <button
+                  className="btn btn-outline-dark "
+                  type="button"
+                  onClick={() => setShowLogoutModal(true)}
+                >
+                  Sign Out
+                </button>
               </div>
             )}
-
-            {/* Sign Out Button */}
-            <button
-              className="btn btn-outline-dark ms-2"
-              type="button"
-              onClick={() => setShowLogoutModal(true)}
-            >
-              Sign Out
-            </button>
           </div>
         </div>
       </nav>
