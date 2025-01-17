@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchTerm } from "../../features/product/product";
-function SearchBar() {
+function Searchbar() {
   const { searchTerm } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -25,4 +25,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default Searchbar;
