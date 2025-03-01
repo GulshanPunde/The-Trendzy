@@ -105,7 +105,7 @@ const AdminLoginPage = ({ onLogin }) => {
             Policy.
           </p>
         </div>
-        <div
+         <div
         className="text-center mt-3"
         style={{
           fontSize: "14px",

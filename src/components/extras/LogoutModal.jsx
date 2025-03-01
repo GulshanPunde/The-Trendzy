@@ -10,7 +10,7 @@ const LogoutModal = ({ show, onConfirm, onCancel }) => {
         backgroundColor: "rgba(0, 0, 0, 0.5)", // Add overlay effect
       }}
       aria-hidden={!show}
-    >
+    > 
       <div
         className="modal-dialog modal-dialog-centered"
         style={{ maxWidth: "400px" }}
